@@ -8,7 +8,7 @@ const App = () => {
     <>
       <ToastContainer
         toastClassName={() =>
-          "backdrop-blur-md bg-white/40 text-white border border-white/20 shadow-lg rounded-md px-8 mt-2 flex-row flex py-5 min-w-60"
+          "backdrop-blur-md bg-white/40 text-white border border-white/20 shadow-lg rounded-md px-5 mt-2 flex-row flex py-5 min-w-60"
         }
         bodyClassName="text-sm font-medium"
         position="top-right"

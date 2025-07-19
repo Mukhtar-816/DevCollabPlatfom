@@ -53,7 +53,7 @@ const Login = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 2, delay: 1 }}
+        transition={{ duration: 2,    }}
         className="bg-white/10 flex-col backdrop-blur-3xl lg:w-1/2 rounded-2xl hover:backdrop-hue-rotate-30 transition-colors duration-300 ease-linear hover:scale-z-1000 inset-shadow-white/10 gap-5 justify-center border-white/20 h-3/4 relative p-14 items-center flex"
       >
         <h1 className="text-white text-4xl font-semibold py-5">Login</h1>
