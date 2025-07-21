@@ -1,46 +1,44 @@
-const { createAsyncThunk } = require("@reduxjs/toolkit");
-const axios = require("../../../api/axios");
-const { save } = require("../../../utils/reusable");
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../../api/axios";
+import { save } from "../../../utils/reusable";
 
+// Login Thunk
 export const userLogin = createAsyncThunk(
   "auth/login",
-  async ({ email, password }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/auth/login", { email, password });
 
       if (data?.success) {
-        save("accessToken", data.data?.accessToken);
-        save("refreshToken", data.data?.refreshToken);
-        save("user", JSON.stringify(data.data?.user));
+        save("accessToken", data.accessToken);
+        save("refreshToken", data.refreshToken);
+        save("user", JSON.stringify(data.user));
       }
-
       return data;
     } catch (error) {
-      let err = error.message;
-      console.log("Error Logging In");
-      return err;
+      return rejectWithValue(error.response?.data?.error || "Login failed");
     }
   }
 );
 
+// Register Thunk
 export const userRegister = createAsyncThunk(
   "auth/signup",
-  async ({ email, password, name }) => {
+  async ({ email, password, name }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/auth/signup", {
         email,
         password,
         name,
       });
-      save("accessToken", data.data.accessToken);
-      save("refreshToken", data.data.refreshToken);
-      save("user", JSON.stringify(data.data.user));
+
+      save("accessToken", data.accessToken);
+      save("refreshToken", data.refreshToken);
+      save("user", JSON.stringify(data.user));
 
       return data;
     } catch (error) {
-      let err = error.message;
-      console.log("Error Signing Up");
-      return err;
+      return rejectWithValue(error.response?.data?.error || "Sign up failed");
     }
   }
 );

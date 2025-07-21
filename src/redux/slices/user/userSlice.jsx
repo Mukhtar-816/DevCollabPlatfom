@@ -1,6 +1,5 @@
-const { createSlice } = require("@reduxjs/toolkit");
-const { userLogin } = require("./userAction");
-const { build } = require("vite");
+import { createSlice } from "@reduxjs/toolkit";
+import { userLogin, userRegister } from "./userAction";
 
 const initialState = {
   loading: false,
@@ -15,19 +14,40 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Login
     builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.accessToken = payload.data.accessToken;
-      state.success = payload.success;
-      state.userInfo = payload.data.user;
+      state.accessToken = payload.accessToken;
+      state.userInfo = payload.user;
+      state.success = true;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
+    });
+
+    // Register
+    builder.addCase(userRegister.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(userRegister.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.accessToken = payload.accessToken;
+      state.userInfo = payload.user;
+      state.success = true;
+    });
+    builder.addCase(userRegister.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      state.success = false;
     });
   },
 });
+
+export default userSlice.reducer;

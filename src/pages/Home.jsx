@@ -1,5 +1,5 @@
 import React from "react";
-import BackgroundVideo from "../../components/backgroundVideo";
+import BackgroundVideo from "../components/backgroundVideo";
 
 const Home = () => {
   return (
