@@ -24,7 +24,7 @@ const SignUp = () => {
   const { handleAuthenticated, setLoading, loading, authenticated } = useAuth();
 
   useEffect(() => {
-    authenticated && navigate("/");
+    authenticated && navigate("/userDashboard");
   }, [authenticated]);
 
   //handlers

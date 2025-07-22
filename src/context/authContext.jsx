@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-
 import { createContext, useContext, useState, useEffect } from "react";
+import { logout } from "../redux/slices/user/userSlice";
 
 //create context, lightweight global state, redux is same but for high scale
 const AuthContext = createContext();
@@ -15,15 +15,17 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    function checkAuth() {
-      const accessToken = localStorage.getItem("accessToken");
-      if (accessToken) {
-        setAuthenticated(true);
-      }
-      setLoading(false); // <-- MARK DONE CHECKING
+  function checkAuth() {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
+    setLoading(false); // <-- MARK DONE CHECKING
+  }
 
+  useEffect(() => {
     checkAuth();
   }, [authenticated]);
 
@@ -31,9 +33,21 @@ export const AuthProvider = ({ children }) => {
     setAuthenticated(value);
   };
 
+  const Logout = async () => {
+    dispatch(logout());
+    checkAuth();
+  };
+
   return (
     <AuthContext.Provider
-      value={{ loading, authenticated, handleAuthenticated, userData, setLoading }}
+      value={{
+        loading,
+        authenticated,
+        handleAuthenticated,
+        userData,
+        setLoading,
+        Logout,
+      }}
     >
       {children} {/* ← prevent rendering until check finishes */}
     </AuthContext.Provider>

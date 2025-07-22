@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userLogin, userRegister } from "./userAction";
+import { remove } from "../../../utils/reusable";
 
 const initialState = {
   loading: false,
@@ -12,7 +13,13 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: () => {
+      remove("accessToken");
+      remove("refreshToken");
+      return initialState;
+    },
+  },
   extraReducers: (builder) => {
     // Login
     builder.addCase(userLogin.pending, (state) => {
@@ -51,3 +58,5 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+
+export const { logout } = userSlice.actions;

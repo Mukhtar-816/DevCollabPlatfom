@@ -4,6 +4,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import UserDashboard from "../pages/UserDashboard";
+import Profile from "../pages/Profile";
+import Setting from "../pages/Setting";
 
 const AppRouter = () => {
 
@@ -21,10 +24,24 @@ const AppRouter = () => {
           path="/userdashboard"
           element={
             <PrivateRoute>
-              <Home />
+              <UserDashboard />
             </PrivateRoute>
           }
         />
+        <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile/>
+          </PrivateRoute>
+        }/>
+        <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Setting/>
+          </PrivateRoute>
+        }/>
       </Routes>
     </BrowserRouter>
   );

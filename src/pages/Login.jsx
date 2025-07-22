@@ -11,15 +11,15 @@ import CustomLoader from "../components/loader";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const {handleAuthenticated, setLoading, loading, authenticated} = useAuth();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    authenticated && navigate("/");
+    authenticated && navigate("/userDashboard");
   },[authenticated]);
 
   const handleOnLocalLogin = async () => {
@@ -74,7 +74,7 @@ const Login = () => {
 
   return (
     <div className="relative flex-col flex h-full min-h-[100vh] w-full overflow-hidden px-10 py-10 justify-center items-center">
-      {loading && <CustomLoader/>}
+      {loading && <CustomLoader />}
       {/* Background Video */}
       <BackgroundVideo />
 
