@@ -7,10 +7,9 @@ import PrivateRoute from "./PrivateRoute";
 import UserDashboard from "../pages/UserDashboard";
 import Profile from "../pages/Profile";
 import Setting from "../pages/Setting";
+import Public_Profile from "../pages/Public_Profile";
 
 const AppRouter = () => {
-
-  
   return (
     <BrowserRouter>
       <Routes>
@@ -18,6 +17,7 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        
 
         {/* Private */}
         <Route
@@ -29,19 +29,29 @@ const AppRouter = () => {
           }
         />
         <Route
-        path="/profile"
-        element={
-          <PrivateRoute>
-            <Profile/>
-          </PrivateRoute>
-        }/>
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
         <Route
-        path="/settings"
-        element={
-          <PrivateRoute>
-            <Setting/>
-          </PrivateRoute>
-        }/>
+          path="/profile:id"
+          element={
+            <PrivateRoute>
+              <Public_Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Setting />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

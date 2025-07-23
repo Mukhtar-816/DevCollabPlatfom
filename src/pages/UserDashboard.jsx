@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import DropDownComponent from "../components/CustomDropDown";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import CustomPageAnimation from "../components/CustomPageAnimation";
 
 
 const UserDashboard = () => {
@@ -50,11 +51,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <motion.div
-    initial={{opacity:0}}
-    animate={{opacity : 100}}
-    transition={{duration : 1}}
-     className="flex relative overflow-hidden h-screen w-full bg-black/80">
+    <CustomPageAnimation>
       {/* <BackgroundVideo /> */}
       {loading && <CustomLoader />}
       <CustomHeader
@@ -69,7 +66,7 @@ const UserDashboard = () => {
           <DropDownComponent key="dropdown" data={DropDownOptions} />
         )}
       </AnimatePresence>
-    </motion.div>
+    </CustomPageAnimation>
   );
 };
 
