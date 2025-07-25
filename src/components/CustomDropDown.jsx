@@ -30,6 +30,7 @@ const DropDownComponent = ({ ...props }) => {
     >
       {currentData?.map((item, index) => (
         <button
+        key={index}
           onClick={item?.onClick}
           className={`justify-center bg-transparent active:scale-95 transition-all duration-300 hover:bg-white/10 flex items-center px-3 py-2 text-white border-b border-b-white/20 ${
             index === currentData.length - 1 ? "border-b-0" : ""

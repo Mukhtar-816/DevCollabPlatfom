@@ -34,11 +34,26 @@ export const userRegister = createAsyncThunk(
 
       save("accessToken", data.accessToken);
       save("refreshToken", data.refreshToken);
-      save("user", JSON.stringify(data.user));
+      // save("user", JSON.stringify(data.user));
 
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.error || "Sign up failed");
+    }
+  }
+);
+
+export const userProfile = createAsyncThunk(
+  "user/profile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/user/profile");
+      save("user", JSON.stringify(response.data));
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.error || "Could not fetch user data"
+      );
     }
   }
 );
